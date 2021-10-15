@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name PEC3124C2A-AU)(type Legacy)(uri ${KIPRJMOD}/PEC3124C2A-AU.lib)(options "")(descr ""))
+  (lib (name APA-104-2020-5mA)(type Legacy)(uri ${KIPRJMOD}/APA-104-2020-5mA.lib)(options "")(descr ""))
+  (lib (name M0A21)(type Legacy)(uri ${KIPRJMOD}/M0A21.lib)(options "")(descr ""))
+)

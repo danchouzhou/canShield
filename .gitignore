@@ -1,3 +1,7 @@
+# User specified
+datasheet
+reference
+
 # For PCBs designed using KiCad: http://www.kicad-pcb.org/
 # Format documentation: http://kicad-pcb.org/help/file-formats/
 
@@ -15,7 +19,7 @@ _autosave-*
 fp-info-cache
 
 # Netlist files (exported from Eeschema)
-*.net
+# *.net
 
 # Autorouter files (exported from Pcbnew)
 *.dsn

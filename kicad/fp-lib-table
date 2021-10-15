@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name APA-104-2020-5mA)(type KiCad)(uri ${KIPRJMOD}/APA-104-2020-5mA.pretty)(options "")(descr ""))
+)
