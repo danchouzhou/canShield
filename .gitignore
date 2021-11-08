@@ -1,3 +1,10 @@
+# Firmware
+*.o
+*.map
+*.axf
+*.bin
+.vscode
+
 # User specified
 datasheet
 reference
