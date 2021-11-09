@@ -11,6 +11,11 @@
 #include <stdio.h>
 #include "NuMicro.h"
 
+// Choose your transceiver here
+//#define MCP2561 // Pin 5: Standby
+//#define MCP2562 // Pin 5: VIO
+#define MCP2551 // Pin 5: Slope control
+
 /*---------------------------------------------------------------------------------------------------------*/
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
@@ -304,6 +309,22 @@ int main()
     tCAN = (CAN_T *) CAN;
 
     SYS_Init();
+
+#ifdef MCP2561
+    SYS->GPD_MFP0 = (SYS->GPD_MFP0 & ~SYS_GPD_MFP0_PD0MFP_Msk) | SYS_GPD_MFP0_PD0MFP_GPIO;
+    PD->MODE = (PD->MODE & ~((GPIO_MODE_QUASI) << ((0)<<1)) | ((GPIO_MODE_OUTPUT) << ((0)<<1))); // Set PD.0 mode as output
+    PD0 = 0; // Normal Mode
+#endif
+#ifdef MCP2562
+    SYS->GPD_MFP0 = (SYS->GPD_MFP0 & ~SYS_GPD_MFP0_PD0MFP_Msk) | SYS_GPD_MFP0_PD0MFP_GPIO;
+    PD->MODE = (PD->MODE & ~((GPIO_MODE_QUASI) << ((0)<<1)) | ((GPIO_MODE_OUTPUT) << ((0)<<1))); // Set PD.0 mode as output
+    PD0 = 1; // Output high to supply VIO
+#endif
+#ifdef MCP2551
+    SYS->GPD_MFP0 = (SYS->GPD_MFP0 & ~SYS_GPD_MFP0_PD0MFP_Msk) | SYS_GPD_MFP0_PD0MFP_GPIO;
+    PD->MODE = (PD->MODE & ~((GPIO_MODE_QUASI) << ((0)<<1)) | ((GPIO_MODE_INPUT) << ((0)<<1))); // Set PD.0 mode as input
+    // Slope control by the resistor on pin 5, please refer to datasheet.
+#endif
 
     /* Init UART0 to 115200-8n1 for print message */
     UART_Open(UART0, 115200);
