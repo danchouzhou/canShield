@@ -89,9 +89,11 @@ void NeoPixel_setPin(STR_NEOPIXEL_T *pNeoPixel, volatile uint32_t *pu32pdio)
     /* gpio.h:49:0: GPIO_PIN_DATA(port, pin)    (*((volatile uint32_t *)((GPIO_PIN_DATA_BASE+(0x40*(port))) + ((pin)<<2)))) */
     GPIO_T *port;
     int8_t pin;
+    uint32_t base;
 
     /* Get port and pin from PDIO */
-    port = (GPIO_T *)( ( ( (uint32_t)pu32pdio - GPIO_PIN_DATA_BASE) & 0x1C0) + PA_BASE);
+    base = (uint32_t *)PA;
+    port = (GPIO_T *)( ( ( (uint32_t)pu32pdio - GPIO_PIN_DATA_BASE) & 0x1C0) + base);
     pin = ( ( (uint32_t)pu32pdio - GPIO_PIN_DATA_BASE) & 0x3F) >> 2;
 
     port->MODE = (port->MODE & ~( (GPIO_MODE_QUASI) << ( (pin)<<1)) | ( (GPIO_MODE_OUTPUT) << ( (pin)<<1)));
